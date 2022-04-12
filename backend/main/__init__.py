@@ -1,9 +1,21 @@
-from ast import In
-from errno import ELIBACC
-from operator import iadd
-from pydoc import Doc, doc
-import tabnanny
-from xml.dom import InvalidModificationErr
-from es 
+import os
 from flask import Flask
-from detenv import_detenv
+from dotenv import load_dotenv
+from flask_restful import Api
+import main.resources as resources 
+api = Api
+
+def create_app():
+    app = Flask(__name__)
+    load_dotenv()
+
+
+
+    api.add_resource(resources.CalificationResource, '/calification/<id>')
+    api.add_resource(resources.CalificationsResource, '/califications')
+    api.add_resource(resources.PoemResource, '/poema/<id>')
+    api.add_resource(resources.PoemsResource, '/poemas')
+    api.add_resource(resources.UserResource, '/user/<id>')
+    api.add_resource(resources.UserResource, '/users')
+    api.init_app(app)
+    return app
